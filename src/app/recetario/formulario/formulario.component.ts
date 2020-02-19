@@ -38,7 +38,7 @@ export class FormularioComponent implements OnInit {
       descripcion: ['', [Validators.required, Validators.minLength(100)]],
       gluten: ["true", Validators.required],
       imagen: ['assets/imgs/receta_default.jpg', Validators.required],
-      ingredientes: this.fb.array([this.createIngredienteFormGroup(), Validators.required, Validators.minLength(3)])
+      ingredientes: this.fb.array([this.createIngredienteFormGroup(), Validators.minLength(3)])
     });
   }
 
@@ -73,61 +73,89 @@ export class FormularioComponent implements OnInit {
     console.log('FormularioComponent onSubmit');
 
     //recoger datos del formulario
-    let receta = this.mapearFormularioReceta(this.formulario);
+    let receta = this.formulario.value;
+
+    console.log('submit : %o', receta);
 
     //llamar Servicio
-    this.recetasService.crear(receta);
+    this.recetasService.crear(receta).subscribe(
+      data => {
+        console.debug('receta creada ok %o', data);
 
-    //Resetar Formulario e Inicializar
-    this.formulario.reset({
-      gluten: "true",
-      imagen: "assets/imgs/receta_default.jpg"
-    });
-    // dejar solo un ingrediente
-    this.ingredientes.controls.splice(1);
+        //Resetar Formulario e Inicializar
+        this.formulario.reset({
+          gluten: "true",
+          imagen: "assets/imgs/receta_default.jpg"
+        });
+        // dejar solo un ingrediente
+        this.ingredientes.controls.splice(1);
 
 
-    //TODO cerrar modal    
-    //$("#modalReceta").modal('hide');
-    $("#btn-close").click();
+        //TODO cerrar modal    
+        //$("#modalReceta").modal('hide');
+        $("#btn-close").click();
+
+      },
+      error => {
+        console.warn(error);
+      }
+    );
 
   }
 
-  /**
-   * Nos retorna las clases para darle estilos al div que contiene el input
-   * @param control : FormControl
-   */
-  estilosInput(control: FormControl): string {
+  onGet() {
 
-    const CLASS_ERROR = "form-group has-error";
-    const CLASS_SUCCESS = "form-group has-success";
+    this.recetasService.getAll().subscribe(
+      datos => {
+        console.debug('get pokemons ok %o', datos);
 
-    if (control.dirty) {
-      return (control.valid) ? CLASS_SUCCESS : CLASS_ERROR;
-    } else {
-      return "form-group";
-    }
+        // this.pokemons = datos;
+
+      },
+      error => {
+        console.warn(error);
+      }
+
+      }
+    )
+
+}//onGet
+
+/**
+ * Nos retorna las clases para darle estilos al div que contiene el input
+ * @param control : FormControl
+ */
+estilosInput(control: FormControl): string {
+
+  const CLASS_ERROR = "form-group has-error";
+  const CLASS_SUCCESS = "form-group has-success";
+
+  if (control.dirty) {
+    return (control.valid) ? CLASS_SUCCESS : CLASS_ERROR;
+  } else {
+    return "form-group";
   }
+}
 
-  /**
-   * Mapear Los datos del Formulario a una Receta
-   * @param form : FormGroup
-   */
-  mapearFormularioReceta(form: FormGroup): Receta {
+/**
+ * Mapear Los datos del Formulario a una Receta
+ * @param form : FormGroup
+ */
+mapearFormularioReceta(form: FormGroup): Receta {
 
-    let receta = new Receta(form.value.nombre);
-    receta.cocinero = form.value.cocinero;
-    receta.isGlutenFree = (form.value.gluten === "true") ? false : true;
-    receta.imagen = form.value.imagen;
-    receta.descripcion = form.value.descripcion;
+  let receta = new Receta(form.value.nombre);
+  receta.cocinero = form.value.cocinero;
+  receta.isGlutenFree = (form.value.gluten === "true") ? false : true;
+  receta.imagen = form.value.imagen;
+  receta.descripcion = form.value.descripcion;
 
-    //recuperar los ingredientes
-    form.value.ingredientes.map(element => {
-      receta.addIngrediente(element.nombre);
-    });
+  //recuperar los ingredientes
+  form.value.ingredientes.map(element => {
+    receta.addIngrediente(element.nombre);
+  });
 
-    return receta;
-  }
+  return receta;
+}
 
 
 
