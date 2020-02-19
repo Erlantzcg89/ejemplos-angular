@@ -1,0 +1,33 @@
+
+
+  <h2>{{receta.nombre}}</h2>
+
+  <div class="receta-content row">
+    
+    <div class="col-md-5">    
+      <a class="thumbnail">
+        <img class="img-rounded" src="{{receta.imagen}}" alt="{{receta.nombre}}" data-toggle="modal">
+        <img [src]=" (receta.isGlutenFree) ? 'assets/imgs/gluten_free_icon.png' : 'assets/imgs/gluten_icon.png' " alt="info gluten" class="icono-gluten">
+      </a>
+      <p id="pieFoto">
+        <span class="glyphicon glyphicon-heart" aria-hidden="true" (click)="sumLike()"> {{receta.likes}}</span>
+        <span id="cocinero">By {{receta.cocinero}}</span>
+      </p>      
+    </div>
+    
+    <div class="col-md-7">
+      <h4>Ingredientes</h4>
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor='let ingrediente of receta.ingredientes'>{{ingrediente}}</li>
+      </ul>
+    </div> 
+
+
+    <div class="col-md-12">
+      <p>{{receta.descripcion}}</p>
+    </div>
+
+  </div>  
+
+  
+

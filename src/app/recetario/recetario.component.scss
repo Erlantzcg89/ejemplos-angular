@@ -1,0 +1,25 @@
+/* Estilos de RecetarioComponent */
+
+#buscadorRecetas {
+    /* margin-bottom: 20px; */
+
+    .glyphicon-search {
+        top: 0;
+    }
+}
+
+#listaRecetas {
+
+    a.list-group-item {
+        position: relative;
+        .icono-gluten {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            width: 25px;
+            height: auto;
+        }
+    }
+    
+    
+}

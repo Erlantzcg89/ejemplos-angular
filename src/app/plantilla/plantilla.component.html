@@ -1,0 +1,23 @@
+
+<a href="https://angular.io/guide/structural-directives" target="_blank">Estructuras para plantillas</a>
+
+
+<button (click)="switchUser()">Switch User</button>
+<br>
+<br>
+
+<div *ngIf="admin; then adminTemplate else userTemplate"></div>
+
+<ng-template #adminTemplate>
+    <span class="label label-warning">Administrador</span>
+</ng-template>
+
+<ng-template #userTemplate>
+  <span class="label label-default">Usuario</span>
+</ng-template>
+  
+
+
+
+
+

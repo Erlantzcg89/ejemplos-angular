@@ -1,0 +1,20 @@
+<div class="col-sm-6">
+
+    <div class="thumbnail">
+        <img src="{{c1.foto}}" alt="foto {{c1.marca}} {{c1.modelo}}">
+        <div class="caption">
+            <h3>{{c1.marca}}</h3>
+            <p>{{c1.modelo}} {{c1.version}}</p>    
+            <hr>
+            <p>Puertas: {{c1.puertas}}
+                <span [class]="(c1.puertas-c2.puertas>0)?'badge positivo':'badge negativo'">{{c1.puertas-c2.puertas}}</span>
+            </p>       
+            <p>Caballos: {{c1.caballos}}
+                <span [class]="(c1.caballos-c2.caballos>0)?'badge positivo':'badge negativo'">{{c1.caballos-c2.caballos}}</span>
+            </p>       
+            <p>Consumo: {{c1.consumo}}
+                <span [class]="(c1.consumo-c2.consumo>0)?'badge positivo':'badge negativo'">{{c1.consumo-c2.consumo | round }}</span>
+            </p>       
+        </div>
+    </div>
+</div>

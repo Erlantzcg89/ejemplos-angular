@@ -1,0 +1,82 @@
+ <!-- navbar -->
+ <nav class="navbar navbar-default">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" [routerLink]="['']">{{title}}</a>
+          </div>
+          <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">        
+
+              <!-- ejemplos basicos -->
+              <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                  Básicos<span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li> <a [routerLink]="['receta']">Receta</a></li>
+                  <li> <a [routerLink]="['usuario']">Usuario</a></li>   
+                  <li> <a [routerLink]="['propiedades']">Propiedades</a></li>  
+                  <li><a [routerLink]="['plantilla']">Plantilla</a></li>             
+                  <li><a [routerLink]="['saludar/Ambrosio']">Paso Parametros Routing</a></li>       
+                </ul>
+              </li>
+
+              <!-- formularios -->
+              <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                  Formularios<span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a [routerLink]="['formulario-basico']">Formulario Básico</a></li>
+                  <li><a [routerLink]="['formulario-complejo']">Formulario Complejo</a></li>                  
+                </ul>
+              </li>             
+             
+              <!-- ejemplos avanzados -->
+                <li routerLinkActive="active">
+                    <a [routerLink]="['recetario']">Recetario</a>
+                </li>  
+
+                <li routerLinkActive="active">
+                  <a [routerLink]="['inmobiliaria']">Inmobiliaria</a>
+                </li>  
+
+                <li routerLinkActive="active">
+                  <a [routerLink]="['todos']">Todos-Rest</a>
+                </li> 
+               
+                <li routerLinkActive="active">
+                  <a [routerLink]="['concesionario']">Concesionario</a>
+                </li>
+
+                <li routerLinkActive="active" class="btn-warning dropdown-toggle">
+                    <a [routerLink]="['backoffice']">Backoffice</a>
+                </li>
+
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+</nav>
+<!-- / navbar -->
+
+  
+<!-- Begin page content -->
+<div class="container">
+
+  <router-outlet></router-outlet>
+    
+</div>
+  
+<footer class="footer">
+    <div class="container">
+        <p class="text-muted">Ipartek Servicios informaticos 2018</p>
+    </div>
+</footer>
+
+

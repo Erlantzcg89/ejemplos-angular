@@ -1,0 +1,23 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+//colores
+
+$primary-color: #1D8D8D;
+
+.active{
+    border-bottom: 3px solid #E6332A;
+    a {
+        box-shadow: none !important;
+    }    
+}
+
+
+p{
+    font-size: 1em;    
+}
+
+
+footer{
+   /* background-color: red; */
+}

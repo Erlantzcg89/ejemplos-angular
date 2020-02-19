@@ -1,0 +1,43 @@
+<div class="row">
+
+
+    <!-- listado + filtro -->
+    <div class="col-md-6">
+
+      <div class="row">
+        <input type="search" [(ngModel)]="searchText" placeholder="Dirección o nombre de la Casa">        
+
+        <input type="radio" [(ngModel)]="modo" name="modo" value="0"> Alquiler
+        <input type="radio" [(ngModel)]="modo" name="modo" value="1"> Venta
+        <input type="radio" [(ngModel)]="modo" name="modo" value="2"> Todos<br>
+
+        <label>Precio Min:</label>
+        <input type="number" [(ngModel)]="precioMin">
+
+        <label>Max:</label>
+        <input type="number" [(ngModel)]="precioMax" (ngModelChange)="checkPrecio($event)">
+ 
+      </div>
+
+      <div *ngFor="let casa of casas | filterCasa : searchText : modo : precioMin : precioMax" 
+            (click)="cambioCasa(casa)"
+            class="col-md-6">
+
+        <div class="thumbnail">
+          <img src="{{casa.foto}}" alt="{{casa.nombre}}">
+          <div class="caption">
+            <h3>{{casa.nombre}} <span>{{casa.precio}}€</span></h3>            
+          </div>
+        </div>  
+
+      </div>
+      <!-- end for -->
+
+    </div>
+
+    <!--detalle-->
+    <div class="col-md-6">      
+      <app-casa-detalle [casa]="casaSelec"></app-casa-detalle>
+    </div>
+
+</div>
